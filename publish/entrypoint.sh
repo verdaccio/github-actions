@@ -20,4 +20,4 @@ fi
 
 sh -c "verdaccio --config /verdaccio/config.yaml &"
 
-sh -c "npm --registry http://localhost:4873 $1"
+sh -c "npm  --access public --registry http://localhost:4873 $1"
