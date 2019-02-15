@@ -26,4 +26,4 @@ middlewares:
   audit:
     enabled: true
 logs:
- - {type: stdout, format: pretty, level: trace}
+ - {type: stdout, format: pretty, level: http}
