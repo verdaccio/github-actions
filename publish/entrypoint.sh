@@ -16,6 +16,7 @@ fi
 
 cat "$HOME/.npmrc"
 
+sh -c "mkdir -p $HOME/.config/verdaccio"
 sh -c "cp /config.yaml $HOME/.config/verdaccio/config.yaml"
 
 sh -c "verdaccio --config $HOME/.config/verdaccio/config.yaml &"
