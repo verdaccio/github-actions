@@ -18,4 +18,6 @@ fi
 
 cat "$HOME/.npmrc"
 
+sh -c "cp /config.yaml /github/home/.config/verdaccio/config.yaml"
+
 sh -c "npm --registry http://localhost:4873 $1 --access public -ddd"
