@@ -20,6 +20,7 @@ sh -c "nohup verdaccio --config $HOME/.config/verdaccio/config.yaml &>$tmp_regis
 # Wait for `verdaccio` to boot
 # grep -q 'http address' <(tail -f $tmp_registry_log)
 # Login so we can publish packages
+sh -c "npm set registry https://registry.npmjs.org/"
 sh -c "npx npm-auth-to-token@1.0.0 -u user -p password -e user@example.com -r http://0.0.0.0:4873"
 # Run nmp command
 sh -c "npm --registry http://0.0.0.0:4873 publish $1"
