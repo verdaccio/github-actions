@@ -1,8 +1,14 @@
 storage: /Users/root/.local/share/verdaccio/storage
 
 auth:
-  htpasswd:
-    file: ./htpasswd
+  auth-memory:
+    users:
+      foo:
+        name: foo
+        password: s3cret
+      bar:
+        name: bar
+        password: s3cret
 uplinks:
   npmjs:
     url: https://registry.npmjs.org/

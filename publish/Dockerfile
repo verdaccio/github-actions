@@ -9,9 +9,10 @@ LABEL "repository"="https://github.com/verdaccio/github-actions"
 LABEL "homepage"="https://github.com/verdaccio/github-actions"
 LABEL "maintainer"="Juan Picado <juanpicado19@gmail.com>"
 
-RUN npm install -g verdaccio
-RUN mkdir -p /github/home/.config/verdaccio/
-COPY config.yaml /github/home/.config/verdaccio/config.yaml
+RUN npm install -g verdaccio@next
+RUN npm install -g verdaccio-auth-memory
+RUN mkdir -p /verdaccio
+COPY config.yaml /verdaccio/config.yaml
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

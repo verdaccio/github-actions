@@ -18,6 +18,6 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
   chmod 0600 "$VERDACCIO_CONFIG_USERCONFIG"
 fi
 
-sh -c "verdaccio &"
+sh -c "verdaccio & --config /verdaccio/config.yaml"
 
 sh -c "npm --registry http://localhost:4873 $1"
