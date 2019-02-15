@@ -17,11 +17,9 @@ packages:
   '@*/*':
     access: $anonymous
     publish: $anonymous
-    proxy: npmjs
   '**':
     access: $anonymous
     publish: $anonymous
-    proxy: npmjs
 middlewares:
   audit:
     enabled: true
