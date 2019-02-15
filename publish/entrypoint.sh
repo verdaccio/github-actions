@@ -2,7 +2,7 @@
 
 set -e
 
-if [ -n "$VERDACCIO_AUTH_TOKEN" ]; then
+if [ -n "$NPM_AUTH_TOKEN" ]; then
   # Respect VERDACCIO_CONFIG_USERCONFIG if it is provided, default to $HOME/.npmrc
   VERDACCIO_CONFIG_USERCONFIG="${VERDACCIO_CONFIG_USERCONFIG-"$HOME/.npmrc"}"
   VERDACCIO_REGISTRY_URL="${VERDACCIO_REGISTRY_URL-localhost:4873}"
@@ -13,11 +13,11 @@ if [ -n "$VERDACCIO_AUTH_TOKEN" ]; then
     VERDACCIO_REGISTRY_SCHEME="http"
   fi
 
-  printf "//%s/:_authToken=%s\\nregistry=%s\\nstrict-ssl=%s" "$VERDACCIO_REGISTRY_URL" "$VERDACCIO_AUTH_TOKEN" "${VERDACCIO_REGISTRY_SCHEME}://$VERDACCIO_REGISTRY_URL" "${VERDACCIO_STRICT_SSL}" > "$VERDACCIO_CONFIG_USERCONFIG"
+  printf "//%s/:_authToken=%s\\nregistry=%s\\nstrict-ssl=%s" "$VERDACCIO_REGISTRY_URL" "$NPM_AUTH_TOKEN" "${VERDACCIO_REGISTRY_SCHEME}://$VERDACCIO_REGISTRY_URL" "${VERDACCIO_STRICT_SSL}" > "$VERDACCIO_CONFIG_USERCONFIG"
 
   chmod 0600 "$VERDACCIO_CONFIG_USERCONFIG"
 fi
 
-sh -c "verdaccio $1"
+sh -c "verdaccio &"
 
-sh -c "npm publish $2"
+sh -c "npm --registry http://localhost:4873 $1"
