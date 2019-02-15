@@ -11,6 +11,7 @@ LABEL "maintainer"="Juan Picado <juanpicado19@gmail.com>"
 
 RUN npm install -g verdaccio@next
 RUN npm install -g verdaccio-auth-memory
+RUN npm install --global verdaccio-memory
 
 COPY config.yaml /config.yaml
 COPY entrypoint.sh /entrypoint.sh
