@@ -1,28 +1,26 @@
-storage: /Users/root/.local/share/verdaccio/storage
+# path to a directory with all packages
+storage: /verdaccio/storage/data
+# path to a directory with plugins to include
+plugins: /verdaccio/plugins
 
 auth:
-  auth-memory:
-    users:
-      foo:
-        name: foo
-        password: s3cret
-      bar:
-        name: bar
-        password: s3cret
+  htpasswd:
+    file: /verdaccio/storage/htpasswd
+
 uplinks:
   npmjs:
     url: https://registry.npmjs.org/
 packages:
   '@*/*':
-    access: $all
-    publish: $all
+    access: $anonymous
+    publish: $anonymous
     proxy: npmjs
   '**':
-    access: $all
-    publish: $all
+    access: $anonymous
+    publish: $anonymous
     proxy: npmjs
 middlewares:
   audit:
     enabled: true
 logs:
- - {type: stdout, format: pretty, level: http}
+ - {type: stdout, format: pretty, level: trace}
