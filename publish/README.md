@@ -1,10 +1,10 @@
-# Publish on Local Verdaccio Registry
+# Publish a NPM package in a local registry with Verdaccio
 
-Publish a package in a local registry
+Test the integrity of a package publishing in [Verdaccio](https://verdaccio.org/).
 
 ```
 action "Publish Verdaccio" {
   uses = "verdaccio/github-actions/publish@master"
-  args = ""
+	args = ["publish"]
 }
 ```
