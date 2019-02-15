@@ -1,12 +1,15 @@
-# path to a directory with all packages
-storage: /verdaccio/storage/data
-# path to a directory with plugins to include
-plugins: /verdaccio/plugins
-
 auth:
-  htpasswd:
-    file: /verdaccio/storage/htpasswd
-
+  auth-memory:
+    users:
+      foo:
+        name: test
+        password: test
+      bar:
+        name: test
+        password: test
+store:
+  memory:
+    limit: 1000
 uplinks:
   npmjs:
     url: https://registry.npmjs.org/
