@@ -2,8 +2,9 @@
 
 set -e
 
+local_registry="http://0.0.0.0:4873"
+
 # create .npmrc
-# local_registry="http://0.0.0.0:4873"
 # NPM_AUTH_TOKEN="fake_token"
 # VERDACCIO_CONFIG_USERCONFIG="$HOME/.npmrc"
 # VERDACCIO_REGISTRY_URL="0.0.0.0:4873"
