@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM verdaccio/verdaccio:4.x-next
 
 LABEL "com.github.actions.name"="verdaccio publish"
 LABEL "com.github.actions.description"="Publish on Verdaccio"
@@ -9,10 +9,9 @@ LABEL "repository"="https://github.com/verdaccio/github-actions"
 LABEL "homepage"="https://github.com/verdaccio/github-actions"
 LABEL "maintainer"="Juan Picado <juanpicado19@gmail.com>"
 
-RUN npm install -g verdaccio@next
 RUN npm install -g verdaccio-auth-memory
-RUN mkdir -p /verdaccio
-COPY config.yaml /verdaccio/config.yaml
+
+COPY config.yaml /verdaccio/conf/config.yaml
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
