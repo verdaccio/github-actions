@@ -1,3 +1,10 @@
 # Publish on Local Verdaccio Registry
 
-Experiment
+Publish a package in a local registry
+
+```
+action "Publish Verdaccio" {
+  uses = "verdaccio/github-actions/publish@master"
+  args = ""
+}
+```
