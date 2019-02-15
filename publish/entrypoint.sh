@@ -22,7 +22,7 @@ sh -c "cat $HOME/.config/verdaccio/config.yaml"
 sh -c "cat $HOME/.npmrc"
 sh -c "nohup verdaccio --config $HOME/.config/verdaccio/config.yaml &>$tmp_registry_log &"
 # Wait for `verdaccio` to boot
-grep -q 'http address' <(tail -f $tmp_registry_log)
+# grep -q 'http address' <(tail -f $tmp_registry_log)
 # Login so we can publish packages
 sh -c "npx npm-auth-to-token@1.0.0 -u user -p password -e user@example.com -r http://0.0.0.0:4873"
 # Run nmp command
