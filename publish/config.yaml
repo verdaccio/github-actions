@@ -12,13 +12,13 @@ uplinks:
     url: https://registry.npmjs.org/
 packages:
   '@*/*':
-    access: $anonymous
-    publish: $anonymous
+    access: $all
+    publish: $authenticated
   '**':
-    access: $anonymous
-    publish: $anonymous
+    access: $all
+    publish: $authenticated
 middlewares:
   audit:
     enabled: true
 logs:
- - {type: stdout, format: pretty, level: warn}
+ - {type: stdout, format: pretty, level: http}
