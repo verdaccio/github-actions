@@ -9,7 +9,7 @@ LABEL "repository"="https://github.com/verdaccio/github-actions"
 LABEL "homepage"="https://github.com/verdaccio/github-actions"
 LABEL "maintainer"="Juan Picado <juanpicado19@gmail.com>"
 
-RUN npm install -g verdaccio-auth-memory
+RUN sudo npm install -g verdaccio-auth-memory
 
 COPY config.yaml /verdaccio/conf/config.yaml
 
