@@ -3,7 +3,7 @@ FROM node:10
 LABEL "com.github.actions.name"="Verdaccio Private Registry"
 LABEL "com.github.actions.description"="Publish on Verdaccio"
 LABEL "com.github.actions.icon"="package"
-LABEL "com.github.actions.color"="green"
+LABEL "com.github.actions.color"="#4b5e40"
 
 LABEL "repository"="https://github.com/verdaccio/github-actions"
 LABEL "homepage"="https://github.com/verdaccio/github-actions"
