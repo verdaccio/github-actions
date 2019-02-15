@@ -10,7 +10,7 @@ LABEL "homepage"="https://github.com/verdaccio/github-actions"
 LABEL "maintainer"="Juan Picado <juanpicado19@gmail.com>"
 
 RUN npm install -g verdaccio
-COPY config.yaml /root/.config/verdaccio/
+COPY config.yaml /github/home/.config/verdaccio/config.yaml
 
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
