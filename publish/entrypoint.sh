@@ -2,8 +2,6 @@
 
 set -e
 
-sh -c "verdaccio &"
-
 if [ -n "$NPM_AUTH_TOKEN" ]; then
   # Respect VERDACCIO_CONFIG_USERCONFIG if it is provided, default to $HOME/.npmrc
   VERDACCIO_CONFIG_USERCONFIG="${VERDACCIO_CONFIG_USERCONFIG-"$HOME/.npmrc"}"
@@ -18,6 +16,8 @@ fi
 
 cat "$HOME/.npmrc"
 
-sh -c "cp /config.yaml /github/home/.config/verdaccio/config.yaml"
+sh -c "cp /config.yaml $HOME/.config/verdaccio/config.yaml"
+
+sh -c "verdaccio --config $HOME/.config/verdaccio/config.yaml &"
 
 sh -c "npm --registry http://localhost:4873 $1 --access public -ddd"
