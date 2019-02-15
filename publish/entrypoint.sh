@@ -20,6 +20,6 @@ fi
 
 sh -c "verdaccio --config /verdaccio/config.yaml &"
 
-echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ~/.npmrc
+echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > /github/home/.npm/.npmrc
 
 sh -c "npm  --access public --registry http://localhost:4873 $1"
