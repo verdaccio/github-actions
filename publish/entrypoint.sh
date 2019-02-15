@@ -8,7 +8,7 @@ NPM_AUTH_TOKEN="fake_token"
 VERDACCIO_CONFIG_USERCONFIG="${"$HOME/.npmrc"}"
 VERDACCIO_REGISTRY_URL="${0.0.0.0:4873}"
 VERDACCIO_REGISTRY_SCHEME="http"
-printf "//%s/:_authToken=%s\\nregistry=%s\\nstrict-ssl=%s" "$VERDACCIO_REGISTRY_URL" "$NPM_AUTH_TOKEN" $local_registry "${VERDACCIO_STRICT_SSL}" > "$VERDACCIO_CONFIG_USERCONFIG"
+printf "//%s/:_authToken=%s\\nregistry=%s\\nstrict-ssl=%s" "$VERDACCIO_REGISTRY_URL" "$NPM_AUTH_TOKEN" $local_registry > "$VERDACCIO_CONFIG_USERCONFIG"
 
 chmod 0600 "$VERDACCIO_CONFIG_USERCONFIG"
 
