@@ -6,6 +6,6 @@ Check whether a PR is from a fork or base repository.
 
 ```hcl
 action "pull-request-filter" {
-  uses = "verdaccio/github-actions/pull-request-filter"
+  uses = "verdaccio/github-actions/pull-request-fork-filter"
 }
 ```

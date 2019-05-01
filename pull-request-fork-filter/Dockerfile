@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-LABEL "com.github.actions.name"="git checkout fork"
-LABEL "com.github.actions.description"="Checks pull request from a fork"
+LABEL "com.github.actions.name"="pull request fork filter"
+LABEL "com.github.actions.description"="checks wheter a pull request is from a fork or base repo"
 LABEL "com.github.actions.icon"="git-pull-request"
 LABEL "com.github.actions.color"="white"
 LABEL "repository"="https://github.com/verdaccio/github-actions"
