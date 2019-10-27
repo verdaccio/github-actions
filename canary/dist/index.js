@@ -521,7 +521,7 @@ const github = __webpack_require__(469);
 const exec = __webpack_require__(986);
 const _ = __webpack_require__(557);
 
-const buildBody = (message, pkgName, outputExec, isGlobal, registry = 'https://registry.verdaccio.org') => {
+const buildBody = (message, pkgName, outputExec, isGlobal = 'false', registry = 'https://registry.verdaccio.org') => {
   return `${message}
 \
 \
@@ -534,7 +534,6 @@ npm install${isGlobal == 'true' ? ' --global ' : ' '}${pkgName}@${outputExec} --
 `;
 }
 
-// most @actions toolkit packages have async methods
 async function run() {
   try {
       // Get client and context
@@ -543,18 +542,11 @@ async function run() {
       );
       const pkgName = core.getInput('package-name', {required: true});
       const message = core.getInput('message', {required: true});
-      const isGlobal = core.getInput('is-global', {required: true});
+      const isGlobal = core.getInput('is-global', {required: false});
+      const registry = core.getInput('registry', {required: false});
       const context = github.context;
-      core.debug(`action: ${context.payload.action}`);
-
-      core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
-
       const {owner, repo, number} = context.issue;
       const pull_number = number;
-      // core.debug(`owner: ${owner}`);
-      // core.debug(`number: ${number}`);
-      // core.debug(`repo: ${repo}`)
-
       //  npm --no-git-tag-version version prerelease --preid=12345
       let myOutput = '';
       const options = {};
@@ -568,7 +560,7 @@ async function run() {
       await exec.exec(`npm --no-git-tag-version version prerelease --preid=${shortCommit}-pr${number}`, [], options);
       const npmVersion = myOutput.trim();
       const markdown = await client.markdown.render({
-        text: buildBody(message, pkgName, npmVersion, isGlobal)
+        text: buildBody(message, pkgName, npmVersion, isGlobal, registry)
       });
       const body = markdown.data;
 
@@ -582,18 +574,13 @@ async function run() {
         return comment.user.login === 'verdacciobot'
       });
 
-      // core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
-
       for (const comment of listCommmentsBot) {
         const commentId = comment.id;
-        core.debug(`comment: removing: ${commentId}`);
-        const repsonse = await client.issues.deleteComment({
+        await client.issues.deleteComment({
             owner,
             repo,
             comment_id: commentId
         });
-
-        core.debug(`comment: removed: ${JSON.stringify(repsonse, null, 2)}`);
       }
 
       await client.issues.createComment({
