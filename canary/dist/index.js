@@ -557,15 +557,15 @@ async function run() {
       const outputExec = myOutput;
       core.debug(`outputExec: ${outputExec}`);
       // FUTURE: we can render this
-      // octokit.markdown.render({
-      //  text
-      // })
+      const tessst = await client.markdown.render({
+        text: '### test'
+      });
       // post comment on pull request
       await client.pulls.createReview({
         owner,
         repo,
         pull_number: number,
-        body: "Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \n ``` \n npm install --global "+pkgName+"@"+outputExec+" --registry https://registry.verdaccio.org ```",
+        body: tessst + "Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \n ``` \n npm install --global "+pkgName+"@"+outputExec+" --registry https://registry.verdaccio.org \n```",
         event: 'COMMENT'
       });
   }
