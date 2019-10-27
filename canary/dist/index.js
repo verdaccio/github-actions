@@ -523,10 +523,9 @@ const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.o
   return `
       \n
       Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
-
-        \`bash
-          npm install --global ${pkgName}@${outputExec} --registry ${registry}
-        \`
+      \n
+      ${`npm install --global ${pkgName}@${outputExec} --registry ${registry}`}
+      \n
       `;
 }
 
