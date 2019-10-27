@@ -63,24 +63,24 @@ async function run() {
         return comment.user.login === 'verdacciobot'
       });
 
-      core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
+      // core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
 
       for (const comment of listCommmentsBot) {
         const commentId = comment.id;
         core.debug(`comment: removing: ${commentId}`);
-        await client.issues.deleteComment({
+        const repsonse = await client.issues.deleteComment({
             owner,
             repo,
             comment_id: commentId
         });
-      }
 
-      core.debug('comments removed');
+        core.debug(`comment: removed: ${JSON.stringify(repsonse, null, 2)}`);
+      }
 
       await client.issues.createComment({
         owner,
         repo,
-        number:pull_number,
+        issue_number: pull_number,
         body
       });
 
