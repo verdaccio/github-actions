@@ -533,7 +533,7 @@ async function run() {
 
       // Get client and context
       const client = new github.GitHub(
-        core.getInput('repo-token', {required: true})
+        core.getInput('bot-token', {required: true})
       );
       const context = github.context;
       core.debug(`action: ${context.payload.action}`);
@@ -564,14 +564,7 @@ async function run() {
         owner,
         repo,
         pull_number: number,
-        body: `
-          Thanks for your PR, we have promoted your PR and created a canary version of your PR:
-
-        \`
-          npm install --global verdaccio@${outputExec} --registry https://registry.verdaccio.org
-        \`
-
-        `,
+        body: `Thanks for your PR, we have promoted your PR and created a canary version of your PR: \n\n\`npm install --global verdaccio@${outputExec} --registry https://registry.verdaccio.org\``,
         event: 'COMMENT'
       });
   }
