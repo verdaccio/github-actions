@@ -65,13 +65,15 @@ async function run() {
 
       core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
 
-      listCommmentsBot.forEach(async (comment) => {
+      for (const comment of listCommmentsBot) {
+        const commentId = comment.id;
+        core.debug(`comment: removing: ${commentId}`);
         await client.pulls.deleteComment({
-          owner,
-          repo,
-          comment_id: comment.id
-        })
-      });
+            owner,
+            repo,
+            comment_id: commentId
+        });
+      }
 
       core.debug('comments removed');
 
