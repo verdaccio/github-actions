@@ -65,6 +65,16 @@ async function run() {
 
       core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
 
+      listCommmentsBot.forEach(async (comment) => {
+        await client.pulls.deleteComment({
+          owner,
+          repo,
+          comment_id: comment.id
+        })
+      });
+
+      core.debug('comments removed');
+
       // post comment on pull request
       await client.pulls.createReview({
         owner,
@@ -73,6 +83,8 @@ async function run() {
         body,
         event: 'COMMENT'
       });
+
+      core.debug('comment registry updated');
   }
   catch (error) {
     core.setFailed(error.message);
