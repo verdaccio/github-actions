@@ -31,6 +31,7 @@ async function run() {
       core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
 
       const {owner, repo, number} = context.issue;
+      const pull_number = number;
       // core.debug(`owner: ${owner}`);
       // core.debug(`number: ${number}`);
       // core.debug(`repo: ${repo}`)
@@ -49,13 +50,23 @@ async function run() {
       const markdown = await client.markdown.render({
         text: buildBody(message, pkgName, npmVersion, isGlobal)
       });
+      const body = markdown.data;
+
+
+      const listReviews = await client.pulls.listReviews({
+        owner,
+        repo,
+        pull_number
+      });
+
+      core.debug(`listReviews: ${JSON.stringify(listReviews, null, 2)}`);
 
       // post comment on pull request
       await client.pulls.createReview({
         owner,
         repo,
-        pull_number: number,
-        body: markdown.data,
+        pull_number,
+        body,
         event: 'COMMENT'
       });
   }
