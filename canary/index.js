@@ -40,7 +40,7 @@ async function run() {
           myError += data.toString();
         }
       };
-      await exec.exec('npm', ['--no-git-tag-version', `version prerelease --preid=${context.payload.before}`], options);
+      await exec.exec('npm', ['version', '--no-git-tag-version', `prerelease --preid=${context.payload.before}`], options);
       const outputExec = myOutput;
       core.debug(`outputExec: ${outputExec}`)
       // post comment on pull request
