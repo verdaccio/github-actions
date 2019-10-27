@@ -6,6 +6,7 @@ const exec = require('@actions/exec');
 const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.org') => {
   return `Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
       \
+      \
       \`\`\`
         \
         npm install --global ${pkgName}@${outputExec} --registry ${registry}
