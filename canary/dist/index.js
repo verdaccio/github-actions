@@ -561,7 +561,7 @@ async function run() {
         text: '### test'
       });
 
-      core.debug(`outputExec: ${tessst}`);
+      core.debug(`outputExec: ${JSON.stringify(tessst, null, 3)}`);
       // post comment on pull request
       await client.pulls.createReview({
         owner,
