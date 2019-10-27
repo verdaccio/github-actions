@@ -4,16 +4,14 @@ const github = require('@actions/github');
 const exec = require('@actions/exec');
 
 const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.org') => {
-  return `Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
-      \
-      #### package location
-      \`\`\`
-        \
-        npm install --global ${pkgName}@${outputExec} --registry ${registry}
-        \
-      \`\`\`
-      \
-      `;
+  return `Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \
+\`\`\`
+  \
+  npm install --global ${pkgName}@${outputExec} --registry ${registry}
+  \
+\`\`\`
+\
+`;
 }
 
 // most @actions toolkit packages have async methods
