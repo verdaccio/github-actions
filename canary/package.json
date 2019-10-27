@@ -1,6 +1,6 @@
 {
   "name": "publish-canary",
-  "version": "1.0.1-0",
+  "version": "1.0.1-1",
   "description": "Publish a canary version of your package",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,8 @@
     "@actions/core": "^1.1.1",
     "@actions/exec": "^1.0.1",
     "@actions/github": "^1.1.0",
-    "@actions/io": "^1.0.1"
+    "@actions/io": "^1.0.1",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.20.5",

@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const exec = require('@actions/exec');
+const _ = require('lodash');
 
 const buildBody = (message, pkgName, outputExec, isGlobal, registry = 'https://registry.verdaccio.org') => {
   return `${message}
@@ -28,7 +29,7 @@ async function run() {
       const context = github.context;
       core.debug(`action: ${context.payload.action}`);
 
-      core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
+      // core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
 
       const {owner, repo, number} = context.issue;
       const pull_number = number;
@@ -59,7 +60,11 @@ async function run() {
         pull_number
       });
 
-      core.debug(`listReviews: ${JSON.stringify(listReviews, null, 2)}`);
+      const listCommmentsBot = _.filter(listReviews.data, function(comment) {
+        return comment.user.login === 'verdacciobot'
+      });
+
+      core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
 
       // post comment on pull request
       await client.pulls.createReview({
