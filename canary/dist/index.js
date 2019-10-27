@@ -583,25 +583,32 @@ async function run() {
 
       core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
 
-      for (const comment of listCommmentsBot) {
-        const commentId = comment.id;
-        core.debug(`comment: removing: ${commentId}`);
-        await client.pulls.deleteComment({
-            owner,
-            repo,
-            comment_id: commentId
-        });
-      }
+      // for (const comment of listCommmentsBot) {
+      //   const commentId = comment.id;
+      //   core.debug(`comment: removing: ${commentId}`);
+      //   await client.pulls.deleteComment({
+      //       owner,
+      //       repo,
+      //       comment_id: commentId
+      //   });
+      // }
 
       core.debug('comments removed');
 
       // post comment on pull request
-      await client.pulls.createReview({
+      // await client.pulls.createReview({
+      //   owner,
+      //   repo,
+      //   pull_number,
+      //   body,
+      //   event: 'COMMENT'
+      // });
+
+      await client.issues.createComment({
         owner,
         repo,
-        pull_number,
-        body,
-        event: 'COMMENT'
+        number:pull_number,
+        body
       });
 
       core.debug('comment registry updated');
