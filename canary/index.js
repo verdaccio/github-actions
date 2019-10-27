@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const wait = require('./wait');
 const github = require('@actions/github');
-
+const exec = require('@actions/exec');
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -21,12 +21,16 @@ async function run() {
       );
       const context = github.context;
       core.debug(`action: ${context.payload.action}`);
-      core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
+      // core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
       const {owner, repo, number} = context.issue;
       const issueNumber = context.payload.pull_request.number;
       core.debug(`owner: ${owner}`);
       core.debug(`number: ${number}`);
       core.debug(`repo: ${repo}`)
+      //  npm --no-git-tag-version version prerelease --preid=12345
+      await exec.exec(`npm --no-git-tag-version version prerelease --preid=${context.payload.before}`);
+
+      // post comment on pull request
       await client.pulls.createReview({
         owner,
         repo,
