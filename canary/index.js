@@ -4,12 +4,14 @@ const github = require('@actions/github');
 const exec = require('@actions/exec');
 
 const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.org') => {
+  const code = `npm install --global ${pkgName}@${outputExec} --registry ${registry}`;
+
   return `
-      \n
+
       Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
-      \n
-      ${`npm install --global ${pkgName}@${outputExec} --registry ${registry}`}
-      \n
+      \\
+      ${code}
+      \\
       `;
 }
 
