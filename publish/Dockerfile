@@ -1,7 +1,7 @@
-FROM node:10
+FROM node:12
 
 LABEL "com.github.actions.name"="Verdaccio Private Registry"
-LABEL "com.github.actions.description"="Publish on Verdaccio"
+LABEL "com.github.actions.description"="Publish on Verdaccio v4"
 LABEL "com.github.actions.icon"="package"
 LABEL "com.github.actions.color"="#4b5e40"
 
