@@ -520,11 +520,13 @@ const github = __webpack_require__(469);
 const exec = __webpack_require__(986);
 
 const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.org') => {
-  return `Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \
+  return `Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
+\
+\
 \`\`\`
-  \
-  npm install --global ${pkgName}@${outputExec} --registry ${registry}
-  \
+\
+npm install --global ${pkgName}@${outputExec} --registry ${registry}
+\
 \`\`\`
 \
 `;
@@ -565,7 +567,7 @@ async function run() {
       };
       const shortCommit = context.payload.before.split('', 7).join('');
       await exec.exec(`npm --no-git-tag-version version prerelease --preid=${shortCommit}`, [], options);
-      const outputExec = myOutput;
+      const outputExec = myOutput.trim();
       core.debug(`outputExec: ${outputExec}`);
       // FUTURE: we can render this
       const tessst = await client.markdown.render({
