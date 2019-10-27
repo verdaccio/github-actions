@@ -53,7 +53,6 @@ async function run() {
       });
       const body = markdown.data;
 
-
       const listReviews = await client.pulls.listReviews({
         owner,
         repo,
