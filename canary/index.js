@@ -23,32 +23,32 @@ async function run() {
       core.debug(`action: ${context.payload.action}`);
       // core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
       const {owner, repo, number} = context.issue;
-      const issueNumber = context.payload.pull_request.number;
       core.debug(`owner: ${owner}`);
       core.debug(`number: ${number}`);
       core.debug(`repo: ${repo}`)
       //  npm --no-git-tag-version version prerelease --preid=12345
       let myOutput = '';
-      let myError = '';
 
       const options = {};
       options.listeners = {
         stdout: (data) => {
           myOutput += data.toString();
-        },
-        stderr: (data) => {
-          myError += data.toString();
         }
       };
-      await exec.exec(`npm --no-git-tag-version version prerelease --preid=${context.payload.before}`, [], options);
+      const shortCommit = context.payload.before.split('', 7).join('');
+      await exec.exec(`npm --no-git-tag-version version prerelease --preid=${shortCommit}`, [], options);
       const outputExec = myOutput;
-      core.debug(`outputExec: ${outputExec}`)
+      core.debug(`outputExec: ${outputExec}`);
+      // FUTURE: we can render this
+      // octokit.markdown.render({
+      //  text
+      // })
       // post comment on pull request
       await client.pulls.createReview({
         owner,
         repo,
         pull_number: number,
-        body: "Thanks for your PR, we have promoted your PR and created a canary version of your PR: \n ``` \n npm install --global verdaccio@"+outputExec+" --registry https://registry.verdaccio.org \n```",
+        body: "Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \n ``` \n npm install --global verdaccio@"+outputExec+" --registry https://registry.verdaccio.org \n```",
         event: 'COMMENT'
       });
   }
