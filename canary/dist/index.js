@@ -55,6 +55,7 @@ module.exports = require("os");
 
 const core = __webpack_require__(470);
 const wait = __webpack_require__(949);
+const github = __webpack_require__(690);
 
 
 // most @actions toolkit packages have async methods
@@ -68,6 +69,16 @@ async function run() {
     core.debug((new Date()).toTimeString())
 
     core.setOutput('time', new Date().toTimeString());
+
+      // Get client and context
+      const client = new github.GitHub(
+        core.getInput('repo-token', {required: true})
+      );
+      const context = github.context;
+      const {owner, repo, number} = context.issue;
+      core.debug(`owner: ${owner}`);
+      core.debug(`number: ${number}`);
+      core.debug(`repo: ${repo}`)
   }
   catch (error) {
     core.setFailed(error.message);
@@ -340,6 +351,14 @@ exports.group = group;
 /***/ (function(module) {
 
 module.exports = require("path");
+
+/***/ }),
+
+/***/ 690:
+/***/ (function() {
+
+eval("require")("@actions/github");
+
 
 /***/ }),
 
