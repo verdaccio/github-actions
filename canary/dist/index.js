@@ -544,7 +544,20 @@ async function run() {
       core.debug(`number: ${number}`);
       core.debug(`repo: ${repo}`)
       //  npm --no-git-tag-version version prerelease --preid=12345
-      const outputExec = await exec.exec(`npm --no-git-tag-version version prerelease --preid=${context.payload.before}`);
+      let myOutput = '';
+      let myError = '';
+
+      const options = {};
+      options.listeners = {
+      stdout: (data) => {
+        myOutput += data.toString();
+      },
+      stderr: (data) => {
+        myError += data.toString();
+      }
+      };
+      await exec.exec(`npm --no-git-tag-version version prerelease --preid=${context.payload.before}`);
+      const outputExec = myOutput;
       core.debug(`outputExec: ${outputExec}`)
       // post comment on pull request
       await client.pulls.createReview({
