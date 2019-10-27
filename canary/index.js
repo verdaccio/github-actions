@@ -27,14 +27,13 @@ async function run() {
       core.debug(`owner: ${owner}`);
       core.debug(`number: ${number}`);
       core.debug(`repo: ${repo}`)
-      client.pulls.createComment({
+      await client.pulls.createReview({
         owner,
         repo,
         pull_number: number,
         body: 'hey thanks for your PR',
-        commit_id: '',
-        path: 'README.md'
-      })
+        event: 'COMMENT'
+      });
   }
   catch (error) {
     core.setFailed(error.message);
