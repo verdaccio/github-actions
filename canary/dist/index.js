@@ -520,12 +520,12 @@ const github = __webpack_require__(469);
 const exec = __webpack_require__(986);
 
 const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.org') => {
-  const code = `npm install --global ${pkgName}@${outputExec} --registry ${registry}`;
-
   return `Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
       \
       \`\`\`
-      ${code}
+        \
+        npm install --global ${pkgName}@${outputExec} --registry ${registry}
+        \
       \`\`\`
       \
       `;
