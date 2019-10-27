@@ -519,6 +519,16 @@ const wait = __webpack_require__(949);
 const github = __webpack_require__(469);
 const exec = __webpack_require__(986);
 
+const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.org') => {
+  return `
+      Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
+
+      \`\`\`
+        npm install --global ${pkgName}@${outputExec} --registry ${registry}
+      \`\`\`
+  `;
+}
+
 // most @actions toolkit packages have async methods
 async function run() {
   try {
@@ -558,7 +568,7 @@ async function run() {
       core.debug(`outputExec: ${outputExec}`);
       // FUTURE: we can render this
       const tessst = await client.markdown.render({
-        text: '### test'
+        text: buildBody(pkgName, outputExec)
       });
 
       core.debug(`outputExec: ${JSON.stringify(tessst, null, 3)}`);
@@ -567,7 +577,7 @@ async function run() {
         owner,
         repo,
         pull_number: number,
-        body: tessst.data + "Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \n ``` \n npm install --global "+pkgName+"@"+outputExec+" --registry https://registry.verdaccio.org \n```",
+        body: tessst.data,
         event: 'COMMENT'
       });
   }
