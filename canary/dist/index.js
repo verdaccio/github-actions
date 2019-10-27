@@ -524,7 +524,7 @@ const buildBody = (message, pkgName, outputExec, isGlobal, registry = 'https://r
 \
 \`\`\`
 \
-npm install ${isGlobal ? '--global' : ''} ${pkgName}@${outputExec} --registry ${registry}
+npm install ${isGlobal == 'true' ? '--global' : ''} ${pkgName}@${outputExec} --registry ${registry}
 \
 \`\`\`
 \
