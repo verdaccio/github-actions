@@ -11,11 +11,11 @@ store:
 uplinks:
 packages:
   '@*/*':
-    access: $anonymous
-    publish: $anonymous
+    access: $all
+    publish: $all
   '**':
-    access: $anonymous
-    publish: $anonymous
+    access: $all
+    publish: $all
 middlewares:
   audit:
     enabled: true
