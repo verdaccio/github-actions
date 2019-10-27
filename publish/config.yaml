@@ -7,18 +7,17 @@ auth:
 store:
   memory:
     limit: 1000
+## we don't need any remote request
 uplinks:
-  npmjs:
-    url: https://registry.npmjs.org/
 packages:
   '@*/*':
-    access: $all
-    publish: $authenticated
+    access: $anonymous
+    publish: $anonymous
   '**':
-    access: $all
-    publish: $authenticated
+    access: $anonymous
+    publish: $anonymous
 middlewares:
   audit:
     enabled: true
 logs:
- - {type: stdout, format: pretty, level: http}
+ - {type: stdout, format: pretty, level: trace}

@@ -15,4 +15,4 @@ sh -c "nohup verdaccio --config $HOME/.config/verdaccio/config.yaml &>$tmp_regis
 # login so we can publish packages
 sh -c "npm-auth-to-token -u test -p test -e test@test.com -r $local_registry"
 # Run nmp command
-sh -c "npm $1 --registry $local_registry"
+sh -c "npm --registry $local_registry $*"
