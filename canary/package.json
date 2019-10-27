@@ -1,6 +1,6 @@
 {
   "name": "publish-canary",
-  "version": "1.0.0",
+  "version": "1.0.1-0",
   "description": "Publish a canary version of your package",
   "main": "index.js",
   "scripts": {
