@@ -535,6 +535,7 @@ async function run() {
       const client = new github.GitHub(
         core.getInput('bot-token', {required: true})
       );
+      const pkgName = core.getInput('package-name', {required: true})
       const context = github.context;
       core.debug(`action: ${context.payload.action}`);
       // core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
@@ -564,7 +565,7 @@ async function run() {
         owner,
         repo,
         pull_number: number,
-        body: "Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \n ``` \n npm install --global verdaccio@"+outputExec+" --registry https://registry.verdaccio.org \n```",
+        body: "Thanks for your PR, we have promoted your PR and created a canary version of your proposal: \n ``` \n npm install --global "+pkgName+"@"+outputExec+" --registry https://registry.verdaccio.org \n```",
         event: 'COMMENT'
       });
   }
