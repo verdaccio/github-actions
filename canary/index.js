@@ -40,10 +40,8 @@ async function run() {
         }
       };
       const shortCommit = context.payload.before.split('', 7).join('');
-      await exec.exec(`npm --no-git-tag-version version prerelease --preid=${shortCommit}`, [], options);
+      await exec.exec(`npm --no-git-tag-version version prerelease --preid=${shortCommit}-pr${number}`, [], options);
       const outputExec = myOutput.trim();
-      core.debug(`outputExec: ${outputExec}`);
-      // FUTURE: we can render this
       const markdown = await client.markdown.render({
         text: buildBody(pkgName, outputExec)
       });
