@@ -580,7 +580,7 @@ async function run() {
         owner,
         repo,
         pull_number: number,
-        body: tessst.data,
+        body: buildBody(pkgName, outputExec),
         event: 'COMMENT'
       });
   }
