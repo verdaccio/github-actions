@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const wait = require('./wait');
 const github = require('@actions/github');
 const exec = require('@actions/exec');
 
@@ -19,15 +18,6 @@ npm install --global ${pkgName}@${outputExec} --registry ${registry}
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    console.log(`Waiting ${ms} milliseconds ...`)
-
-    core.debug((new Date()).toTimeString())
-    wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
-
-    core.setOutput('time', new Date().toTimeString());
-
       // Get client and context
       const client = new github.GitHub(
         core.getInput('bot-token', {required: true})
@@ -54,17 +44,16 @@ async function run() {
       const outputExec = myOutput.trim();
       core.debug(`outputExec: ${outputExec}`);
       // FUTURE: we can render this
-      const tessst = await client.markdown.render({
+      const markdown = await client.markdown.render({
         text: buildBody(pkgName, outputExec)
       });
 
-      core.debug(`outputExec: ${JSON.stringify(tessst, null, 3)}`);
       // post comment on pull request
       await client.pulls.createReview({
         owner,
         repo,
         pull_number: number,
-        body: buildBody(pkgName, outputExec),
+        body: markdown.data,
         event: 'COMMENT'
       });
   }
