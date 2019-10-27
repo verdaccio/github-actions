@@ -29,7 +29,7 @@ async function run() {
       const context = github.context;
       core.debug(`action: ${context.payload.action}`);
 
-      // core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
+      core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
 
       const {owner, repo, number} = context.issue;
       const pull_number = number;
