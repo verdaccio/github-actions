@@ -563,7 +563,8 @@ async function run() {
           myOutput += data.toString();
         }
       };
-      const shortCommit = context.payload.before.split('', 7).join('');
+      const commit = context.payload.pull_request.head.sha;
+      const shortCommit = commit.split('', 7).join('');
       await exec.exec(`npm --no-git-tag-version version prerelease --preid=${shortCommit}-pr${number}`, [], options);
       const npmVersion = myOutput.trim();
       const markdown = await client.markdown.render({
