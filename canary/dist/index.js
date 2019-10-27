@@ -564,11 +564,13 @@ async function run() {
         owner,
         repo,
         pull_number: number,
-        body: `Thanks for your PR, we have promoted your PR and created a canary version of your PR:
+        body: `
+          Thanks for your PR, we have promoted your PR and created a canary version of your PR:
 
-        \`\`\`
+        \`
           npm install --global verdaccio@${outputExec} --registry https://registry.verdaccio.org
-        \`\`\`
+        \`
+
         `,
         event: 'COMMENT'
       });
