@@ -544,8 +544,8 @@ async function run() {
       core.debug(`number: ${number}`);
       core.debug(`repo: ${repo}`)
       //  npm --no-git-tag-version version prerelease --preid=12345
-      await exec.exec(`npm --no-git-tag-version version prerelease --preid=${context.payload.before}`);
-
+      const outputExec = await exec.exec(`npm --no-git-tag-version version prerelease --preid=${context.payload.before}`);
+      core.debug(`outputExec: ${outputExec}`)
       // post comment on pull request
       await client.pulls.createReview({
         owner,
