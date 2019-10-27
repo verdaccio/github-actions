@@ -518,13 +518,13 @@ const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const exec = __webpack_require__(986);
 
-const buildBody = (pkgName, outputExec, registry = 'https://registry.verdaccio.org') => {
-  return `Thanks for your PR, we have promoted your PR and created a canary version of your proposal:
+const buildBody = (message, pkgName, outputExec, isGlobal, registry = 'https://registry.verdaccio.org') => {
+  return `${message}
 \
 \
 \`\`\`
 \
-npm install --global ${pkgName}@${outputExec} --registry ${registry}
+npm install ${isGlobal ? '--global' : ''} ${pkgName}@${outputExec} --registry ${registry}
 \
 \`\`\`
 \
@@ -538,17 +538,21 @@ async function run() {
       const client = new github.GitHub(
         core.getInput('bot-token', {required: true})
       );
-      const pkgName = core.getInput('package-name', {required: true})
+      const pkgName = core.getInput('package-name', {required: true});
+      const message = core.getInput('message', {required: true});
+      const isGlobal = core.getInput('is-global', {required: true});
       const context = github.context;
       core.debug(`action: ${context.payload.action}`);
-      // core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
+
+      core.debug(`payload: ${JSON.stringify(context.payload, null, 2)}`);
+
       const {owner, repo, number} = context.issue;
-      core.debug(`owner: ${owner}`);
-      core.debug(`number: ${number}`);
-      core.debug(`repo: ${repo}`)
+      // core.debug(`owner: ${owner}`);
+      // core.debug(`number: ${number}`);
+      // core.debug(`repo: ${repo}`)
+
       //  npm --no-git-tag-version version prerelease --preid=12345
       let myOutput = '';
-
       const options = {};
       options.listeners = {
         stdout: (data) => {
@@ -557,9 +561,9 @@ async function run() {
       };
       const shortCommit = context.payload.before.split('', 7).join('');
       await exec.exec(`npm --no-git-tag-version version prerelease --preid=${shortCommit}-pr${number}`, [], options);
-      const outputExec = myOutput.trim();
+      const npmVersion = myOutput.trim();
       const markdown = await client.markdown.render({
-        text: buildBody(pkgName, outputExec)
+        text: buildBody(message, pkgName, npmVersion, isGlobal)
       });
 
       // post comment on pull request
