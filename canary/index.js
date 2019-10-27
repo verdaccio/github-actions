@@ -9,7 +9,7 @@ const buildBody = (message, pkgName, outputExec, isGlobal, registry = 'https://r
 \
 \`\`\`
 \
-npm install ${isGlobal == 'true' ? ' --global' : ' '}${pkgName}@${outputExec} --registry ${registry}
+npm install ${isGlobal == 'true' ? ' --global ' : ' '}${pkgName}@${outputExec} --registry ${registry}
 \
 \`\`\`
 \
@@ -53,10 +53,10 @@ async function run() {
       });
       const body = markdown.data;
 
-      const listReviews = await client.pulls.listReviews({
+      const listReviews = await client.issues.listComments({
         owner,
         repo,
-        pull_number
+        issue_number: pull_number
       });
 
       const listCommmentsBot = _.filter(listReviews.data, function(comment) {
@@ -65,26 +65,17 @@ async function run() {
 
       core.debug(`listCommmentsBot: ${JSON.stringify(listCommmentsBot, null, 2)}`);
 
-      // for (const comment of listCommmentsBot) {
-      //   const commentId = comment.id;
-      //   core.debug(`comment: removing: ${commentId}`);
-      //   await client.pulls.deleteComment({
-      //       owner,
-      //       repo,
-      //       comment_id: commentId
-      //   });
-      // }
+      for (const comment of listCommmentsBot) {
+        const commentId = comment.id;
+        core.debug(`comment: removing: ${commentId}`);
+        await client.issues.deleteComment({
+            owner,
+            repo,
+            comment_id: commentId
+        });
+      }
 
       core.debug('comments removed');
-
-      // post comment on pull request
-      // await client.pulls.createReview({
-      //   owner,
-      //   repo,
-      //   pull_number,
-      //   body,
-      //   event: 'COMMENT'
-      // });
 
       await client.issues.createComment({
         owner,
