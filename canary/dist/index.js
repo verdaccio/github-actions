@@ -544,6 +544,7 @@ async function run() {
       const message = core.getInput('message', {required: true});
       const isGlobal = core.getInput('is-global', {required: false});
       const registry = core.getInput('registry', {required: false});
+      const botName = core.getInput('bot-name', {required: false});
       const context = github.context;
       const {owner, repo, number} = context.issue;
       const pull_number = number;
@@ -571,7 +572,7 @@ async function run() {
       });
 
       const listCommmentsBot = _.filter(listReviews.data, function(comment) {
-        return comment.user.login === 'verdacciobot'
+        return comment.user.login ===  (botName || 'verdacciobot')
       });
 
       for (const comment of listCommmentsBot) {

@@ -20,6 +20,7 @@ jobs:
         package-name: '@verdaccio/ui-theme'
         registry: 'https://registry.verdaccio.org'
         bot-token: ${{ secrets.VERDACCIO_BOT_TOKEN }}
+        bot-name: verdacciobot
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
@@ -42,11 +43,12 @@ Output example:
 
 ##### Properties
 
-* `message`: The title of the message
-* `is-global`: Append `--global` in the install package command
-* `package-name`: Add a custom package name
-* `registry`: The registry used with `--registry`
-* `bot-token`: The registry token.
+* `message`: The title of the message (`required`)
+* `bot-token`: The registry token. (`required`)
+* `package-name`: Add a custom package name (`required`)
+* `is-global`: Append `--global` in the install package command (default: `false`)
+* `registry`: The registry used with `--registry` (default: `https://registry.verdaccio.org`)
+* `bot-name`: The name of the bot (this might be improved in the future, default value `verdacciobot`)
 
 
 ##### Contribute
