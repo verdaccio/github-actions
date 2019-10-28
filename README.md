@@ -11,8 +11,8 @@ This repository aims to contains GitHub Actions that are useful for internal dev
 
 ## Available actions:
 
-* [publish](publish/README.md)
-* [canary](canary/README.md)
+* [publish](publish/README.md): It publish your package in a verdaccio instance
+* [canary](canary/README.md): It creates a canary version of your package and post a message in the pull request
 
 
 These actions are currently uses in some [Verdaccio](https://verdaccio.org) projects.
