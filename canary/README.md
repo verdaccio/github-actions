@@ -29,7 +29,7 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
 ```
 
-> Note that the action do not create Git tags on create a version.
+> Note that the action do not create Git tags on create a version and it only works with **Pull Request**, eg: `on: [pull_request]`.
 
 The version created would be the combination of the current version, commit sha header and the Pull request number.
 
