@@ -49,4 +49,9 @@ Output example:
 * `bot-token`: The registry token.
 
 
+##### Contribute
+
+Run `npm run package` before commit, the `dist` fille should be included in your commit.
+
+
 Author: Juan Picado <juanpicado19@gmail.com>
