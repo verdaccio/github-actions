@@ -12,7 +12,7 @@ This repository aims to contains GitHub Actions that are useful for internal dev
 ## Available actions:
 
 * [publish](publish/README.md)
-* [canary](canarys/README.md)
+* [canary](canary/README.md)
 
 
 These actions are currently uses in some [Verdaccio](https://verdaccio.org) projects.
