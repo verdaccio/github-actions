@@ -2,33 +2,23 @@
 
 Test the integrity of a package publishing in [Verdaccio](https://verdaccio.org/).
 
-```
-    - uses: verdaccio/github-actions/publish@master
-      with:
-        cli: publish
-```
-
 See in action in a full example:
 
 ```
-name: CI
+nname: Publish Pre-check
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  build:
-
+  testVerdaccio:
+    name: Test Verdaccio Publish
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
+    - name: Publish
+      uses: verdaccio/github-actions/publish@v0.1.0
       with:
-        node-version: '12.x'
-    - run: npm install
-    - run: npm test
-    - uses: verdaccio/github-actions/publish@master
-      with:
-        cli: publish
-
+        args: -d
 ```
+
+This is a based in Docker GitHub Action.
