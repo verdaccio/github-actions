@@ -38,9 +38,11 @@ function run() {
         try {
             const url = core.getInput('url');
             core.info('Parsing POST request...');
-            const parsedData = core.getInput('data');
-            core.info(`Parsing data request... ${parsedData}`);
-            const data = JSON.parse(parsedData);
+            const release = core.getInput('release');
+            core.info(`Parsing data request... ${release}`);
+            const data = {
+                version: release
+            };
             core.info('Sending POST request...');
             yield axios_1.default.post(url, data);
         }
