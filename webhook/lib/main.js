@@ -36,9 +36,9 @@ const axios_1 = __importDefault(require("axios"));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const url = core.getInput('url');
+            const url = core.getInput('url', { required: true });
             core.info('Parsing POST request...');
-            const release = core.getInput('release');
+            const release = core.getInput('release', { required: true });
             core.info(`Parsing data request... ${release}`);
             const data = {
                 version: release

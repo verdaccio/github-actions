@@ -3,9 +3,9 @@ import axios from 'axios'
 
 async function run(): Promise<void> {
   try {
-    const url: string = core.getInput('url');
+    const url: string = core.getInput('url', {required: true});
     core.info('Parsing POST request...');
-    const release = core.getInput('release');
+    const release = core.getInput('release', {required: true});
     core.info(`Parsing data request... ${release}`);
     const data = {
       version: release

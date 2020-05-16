@@ -5,7 +5,7 @@
   "description": "Send a POST request to trigger any webhook",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && yarn package",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
