@@ -1,0 +1,17 @@
+name: 'Verdaccio Webhook POST Action'
+description: 'Send a POST request to trigger a POST webhook'
+author: 'Juan Picado'
+branding:
+  icon: 'bell'  
+  color: 'yellow'
+inputs:
+  url:
+    description: 'URL of webhook to send post request to'
+    required: true
+  data:
+    description: 'JSON string of data to pass into request'
+    default: '{}'
+    required: true
+runs:
+  using: 'node12'
+  main: 'lib/main.js'
