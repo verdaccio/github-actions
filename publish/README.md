@@ -5,7 +5,7 @@ Test the integrity of a package publishing in [Verdaccio](https://verdaccio.org/
 See in action in a full example:
 
 ```
-nname: Publish Pre-check
+name: Publish Pre-check
 
 on: [push, pull_request]
 
