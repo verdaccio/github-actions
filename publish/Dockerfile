@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:22
 
 LABEL "com.github.actions.name"="Verdaccio Private Registry"
 LABEL "com.github.actions.description"="Publish on Verdaccio v4"
