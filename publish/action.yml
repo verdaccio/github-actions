@@ -5,8 +5,13 @@ inputs:
   debug:
     description: 'npm debug level'
     default: '-ddd'
+  verdaccio-version:
+    description: 'Verdaccio version to use'
+    default: 'latest'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.debug }}
+  env:
+    VERDACCIO_VERSION: ${{ inputs.verdaccio-version }}

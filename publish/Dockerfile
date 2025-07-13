@@ -9,9 +9,15 @@ LABEL "repository"="https://github.com/verdaccio/github-actions"
 LABEL "homepage"="https://github.com/verdaccio/github-actions"
 LABEL "maintainer"="Juan Picado <juanpicado19@gmail.com>"
 
-RUN npm install -g verdaccio && \
+ARG VERDACCIO_VERSION=latest
+ENV VERDACCIO_VERSION=${VERDACCIO_VERSION}
+
+RUN npm install -g verdaccio@${VERDACCIO_VERSION} && \
 	  npm install -g verdaccio-auth-memory && \
-		npm install -g verdaccio-memory
+		npm install -g verdaccio-memory && \
+		npm install -g npm-cli-login
+
+EXPOSE 4873
 
 COPY config.yaml /config.yaml
 
