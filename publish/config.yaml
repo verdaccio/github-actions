@@ -19,5 +19,4 @@ packages:
 middlewares:
   audit:
     enabled: true
-logs:
- - {type: stdout, format: pretty, level: trace}
+log: {type: stdout, format: pretty, level: trace}
