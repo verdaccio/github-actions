@@ -1,4 +1,4 @@
-FROM node:11
+FROM node:24-alpine
 
 LABEL version="1.0.0"
 LABEL repository="https://github.com/verdaccio/github-actions/yarn"
