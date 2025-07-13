@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:24-alpine
 
 LABEL "com.github.actions.name"="Verdaccio Private Registry"
 LABEL "com.github.actions.description"="Publish on Verdaccio v4"
@@ -11,8 +11,7 @@ LABEL "maintainer"="Juan Picado <juanpicado19@gmail.com>"
 
 RUN npm install -g verdaccio && \
 	  npm install -g verdaccio-auth-memory && \
-		npm install -g verdaccio-memory && \
-		npm install -g npm-auth-to-token@1.0.0
+		npm install -g verdaccio-memory
 
 COPY config.yaml /config.yaml
 
